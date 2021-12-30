@@ -1,14 +1,15 @@
 import express from 'express';
 import {connectRedis} from './configs/redis'
+import configs from './configs/default'
 
 const app = express();
 const port = 4000;
 
 // Async configs go here
 (async () => {
+  configs()
   connectRedis()
 })();
-
 
 app.get('/', (_, res) => {
   res.send("Hello World!");
