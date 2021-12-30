@@ -1,11 +1,14 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
-import { createClient } from 'redis';
 
 dotenv.config();
+const redis = require('redis');
+const app = express();
+const port = 3000;
+
 
 (async () => {
-  const client = createClient();
+  const client = redis.createClient({ host:'Monimail', port: 6379 })
 
   client.on('error', (err) => console.log('Redis Client Error', err));
 
@@ -19,8 +22,6 @@ dotenv.config();
 
 
 
-const app = express();
-const port = 3000;
 
 
 app.get('/', (_, res) => {
