@@ -1,13 +1,13 @@
-import express from 'express';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
+import express from 'express'
+import configs from './configs/default'
 
 const app = express();
 const port = 3000;
 
+configs()
+
 app.get('/', (_, res) => {
-  res.send(`Hello World! my DB name is ${process.env.DB_HOST}`);
+  res.send("Hello world");
 });
 
 app.listen(port, () => {
