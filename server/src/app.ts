@@ -1,32 +1,28 @@
 import express from 'express';
-import * as dotenv from 'dotenv';
+import {connectRedis} from './configs/redis'
 
-dotenv.config();
-const redis = require('redis');
 const app = express();
-const port = 3000;
+const port = 4000;
 
-
+// Async configs go here
 (async () => {
-  const client = redis.createClient({ host:'Monimail', port: 6379 })
-
-  client.on('error', (err) => console.log('Redis Client Error', err));
-
-  await client.connect();
-
-  await client.ping();
-
-  await client.set('key', 'value');
-  const value = await client.get('key');
+  connectRedis()
 })();
 
 
-
-
-
 app.get('/', (_, res) => {
-  res.send(`Hello World! my DB name is ${process.env.DB_HOST}`);
+  res.send("Hello World!");
 });
+
+// app.get('/test_set', async (_,res) => {
+//   await client.set("something", "cool")
+//   res.send("OK")
+// })
+
+// app.get('/test_get', async (_,res) => {
+//   const val = await client.get("something")
+//   res.send(`Something ${val}` )
+// })
 
 app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);
