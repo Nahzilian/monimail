@@ -1,7 +1,7 @@
 import { ICompany } from './interfaces'
 
 export class Company implements ICompany {
-    id: string    
+    readonly id: string    
     name: string;
     email: string;
 
