@@ -11,7 +11,7 @@ export class Template implements ITemplate {
         this.id = id;
         this.name = name;
         this.userId = userId;
-        this.type = TemplateType;
+        this.type = type;
         this.createdOn = createdOn;
     }
 
@@ -20,7 +20,7 @@ export class Template implements ITemplate {
             id: this.id,
             name: this.name,
             userId: this.userId,
-            type: this.TemplateType,
+            type: this.type,
             createdOn: this.createdOn,
         }
     }
