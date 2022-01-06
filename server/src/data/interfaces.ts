@@ -1,19 +1,19 @@
-enum Verified {
+export enum Verified {
     yes = "true",
     no = "false"
 }
 
-enum RoleType {
+export enum RoleType {
     admin = "admin",
     editor = "editor"
 }
 
-enum TemplateType {
+export enum TemplateType {
     media = "media",
     template = "template"
 }
 
-enum TrackAction {
+export enum TrackAction {
     view = "view",
     click = "click"
 }
@@ -27,7 +27,7 @@ export interface ICompany {
 export interface IUser {
     readonly id: string,
     firstName: string,
-    lasttName: string,
+    lastName: string,
     email: string,
     username: string,
     // No password
