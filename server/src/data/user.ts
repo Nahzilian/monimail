@@ -11,7 +11,7 @@ export class User implements IUser {
     verified: Verified;
     companyId: string
 
-    constructor (id, firstName, lastName, email, username, role, verified, companyId) {
+    constructor (id: string, firstName: string, lastName: string, email: string, username: string, role: RoleType, verified: Verified, companyId: string) {
         this.id = id
         this.firstName = firstName
         this.lastName = lastName
@@ -23,34 +23,16 @@ export class User implements IUser {
     }
 
     getUser(): IUser {
-        return {
-             id: this.id,
-             firstName: this.firstName,
-             lastName: this.lastName,
-             email: this.email,
-             username: this.username,
-             role: this.role,
-             verified: this.verified,
-             companyId: this.companyId
-        }
+        return this
     }
-    update(firstName, lastName, email, username, role, verified, companyId):IUser {
-        this.firstName = firstName
-        this.lastName = lastName
-        this.email = email
-        this.username = username
-        this.role = role
-        this.verified = verified
-        this.companyId = companyId
-        return {
-            id: this.id,
-            firstName: this.firstName,
-            lastName: this.lastName,
-            email: this.email,
-            username: this.username,
-            role: this.role,
-            verified: this.verified,
-            companyId: this.companyId
-       }
+    update(firstName: string, lastName: string, email: string, username: string, role: RoleType, verified: Verified, companyId: string):IUser {
+        this.firstName = firstName && firstName !== this.firstName ? firstName : this.firstName
+        this.lastName = lastName && lastName !== this.lastName ? lastName : this.lastName
+        this.email = email && email !== this.email ? email : this.email
+        this.username = username && username !== this.username ? username : this.username
+        this.role = role && role !== this.role ? role : this.role
+        this.verified = verified && verified !== this.verified ? verified : this.verified
+        this.companyId = companyId && companyId !== this.companyId ? companyId : this.companyId
+        return this
     }
 }
