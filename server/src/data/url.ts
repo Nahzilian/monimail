@@ -11,11 +11,12 @@ export class Url implements IUrl {
         this.createdOn = createdOn;
     }
 
-    getCompany():IUrl {
-        return {
-            id: this.id,
-            url: this.url,
-            createdOn: this.createdOn,
-        }
+    setItem(url: string): IUrl {
+        this.url = url && url !== this.url ? url : url;
+        return this
+    }
+
+    getItem():IUrl {
+        return this
     }
 }

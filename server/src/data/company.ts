@@ -11,21 +11,13 @@ export class Company implements ICompany {
         this.email = email;
     }
 
-    getCompany():ICompany {
-        return {
-            id: this.id,
-            name: this.name,
-            email: this.email
-        }
+    getItem():ICompany {
+        return this
     }
 
-    updateCompany(name:string, email:string):ICompany {
-        this.name = name
-        this.email = email
-        return {
-            id: this.id,
-            name: this.name,
-            email: this.email
-        }
+    setItem(name:string, email:string):ICompany {
+        this.name = name && name !== this.name ? name : this.name
+        this.email = email && email !== this.email ? email : this.email
+        return this
     }
 }
