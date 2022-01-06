@@ -12,7 +12,7 @@ export class Url implements IUrl {
     }
 
     setItem(url: string): IUrl {
-        this.url = url;
+        this.url = url && url !== this.url ? url : url;
         return this
     }
 
