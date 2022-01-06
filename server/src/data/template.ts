@@ -15,14 +15,14 @@ export class Template implements ITemplate {
         this.createdOn = createdOn;
     }
 
-    updateTemplate(name: string, userId: string, type: TemplateType):Template {
+    setItem(name: string, userId: string, type: TemplateType):Template {
         this.name = name && name !== this.name ? name: this.name;
         this.userId = userId && userId !== this.userId ? userId: this.userId;
         this.type = type && type !== this.type ? type: this.type;
         return this
     }
 
-    getTemplate():ITemplate {
+    getItem():ITemplate {
         return this
     }
 }

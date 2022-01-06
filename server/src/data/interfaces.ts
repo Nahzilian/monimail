@@ -85,7 +85,7 @@ export interface IMailItem {
 }
 
 
-export interface ITracks {
+export interface ITrack {
     readonly id: number,
     actionType: TrackAction,
     mailId: number,
@@ -94,7 +94,7 @@ export interface ITracks {
     createdOn: Date
 }
 
-export interface IBlackList {
+export interface IBlackListItem {
     readonly id: number,
     description: string,
     subscriberId: string

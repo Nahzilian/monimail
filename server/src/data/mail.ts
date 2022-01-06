@@ -11,7 +11,7 @@ export class Mail implements IMail {
         this.createdOn = createdOn;
     }
 
-    getMail():IMail {
+    getItem():IMail {
         return this
     }
 }

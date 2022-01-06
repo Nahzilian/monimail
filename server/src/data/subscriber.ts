@@ -15,7 +15,7 @@ export class Subscriber implements ISubscriber {
         this.companyId= companyId;
     }
 
-    updateSubscriber(firstName: string, lastName: string, email: string, companyId: number): ISubscriber {
+    setItem(firstName: string, lastName: string, email: string, companyId: number): ISubscriber {
         this.firstName= firstName;
         this.lastName= lastName;
         this.email= email;
@@ -23,7 +23,7 @@ export class Subscriber implements ISubscriber {
         return this
     }
 
-    getSubscriber():ISubscriber {
+    getItem():ISubscriber {
         return this
     }
 }

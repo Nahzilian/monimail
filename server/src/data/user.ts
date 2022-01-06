@@ -22,10 +22,10 @@ export class User implements IUser {
         this.companyId = companyId
     }
 
-    getUser(): IUser {
+    getItem(): IUser {
         return this
     }
-    update(firstName: string, lastName: string, email: string, username: string, role: RoleType, verified: Verified, companyId: string):IUser {
+    setItem(firstName: string, lastName: string, email: string, username: string, role: RoleType, verified: Verified, companyId: string):IUser {
         this.firstName = firstName && firstName !== this.firstName ? firstName : this.firstName
         this.lastName = lastName && lastName !== this.lastName ? lastName : this.lastName
         this.email = email && email !== this.email ? email : this.email

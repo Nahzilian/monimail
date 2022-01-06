@@ -11,12 +11,12 @@ export class Url implements IUrl {
         this.createdOn = createdOn;
     }
 
-    updateUrl(url: string): IUrl {
+    setItem(url: string): IUrl {
         this.url = url;
         return this
     }
 
-    getUrl():IUrl {
+    getItem():IUrl {
         return this
     }
 }
