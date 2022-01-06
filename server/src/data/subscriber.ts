@@ -7,7 +7,7 @@ export class Subscriber implements ISubscriber {
     email: string;
     companyId: number;
 
-    constructor(id: string, firstName: string, lastName: string, email: string, companyId: number,) { 
+    constructor(id: string, firstName: string, lastName: string, email: string, companyId: number) { 
         this.id = id;
         this.firstName= firstName;
         this.lastName= lastName;
@@ -15,13 +15,15 @@ export class Subscriber implements ISubscriber {
         this.companyId= companyId;
     }
 
-    getCompany():ISubscriber {
-        return {
-            id: this.id,
-            firstName: this.firstName,
-            lastName: this.lastName,
-            email: this.email,
-            companyId: this.companyId,
-        }
+    updateSubscriber(firstName: string, lastName: string, email: string, companyId: number): ISubscriber {
+        this.firstName= firstName;
+        this.lastName= lastName;
+        this.email= email;
+        this.companyId= companyId;
+        return this
+    }
+
+    getSubscriber():ISubscriber {
+        return this
     }
 }

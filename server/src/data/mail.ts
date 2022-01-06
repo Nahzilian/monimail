@@ -11,11 +11,7 @@ export class Mail implements IMail {
         this.createdOn = createdOn;
     }
 
-    getCompany():IMail {
-        return {
-            id: this.id,
-            templateId: this.templateId,
-            createdOn: this.createdOn,
-        }
+    getMail():IMail {
+        return this
     }
 }

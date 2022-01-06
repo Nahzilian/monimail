@@ -5,7 +5,7 @@ export class Template implements ITemplate {
     name: string;
     userId: string;
     type: TemplateType;
-    createdOn: Date;
+    readonly createdOn: Date;
 
     constructor(id: number, name: string, userId: string, type: TemplateType, createdOn: Date) { 
         this.id = id;
@@ -15,13 +15,14 @@ export class Template implements ITemplate {
         this.createdOn = createdOn;
     }
 
-    getCompany():ITemplate {
-        return {
-            id: this.id,
-            name: this.name,
-            userId: this.userId,
-            type: this.type,
-            createdOn: this.createdOn,
-        }
+    updateTemplate(name: string, userId: string, type: TemplateType):Template {
+        this.name = name && name !== this.name ? name: this.name;
+        this.userId = userId && userId !== this.userId ? userId: this.userId;
+        this.type = type && type !== this.type ? type: this.type;
+        return this
+    }
+
+    getTemplate():ITemplate {
+        return this
     }
 }
