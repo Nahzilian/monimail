@@ -2,6 +2,7 @@ import express from 'express';
 import client, {connectRedis} from './configs/redis'
 import configs from './configs/default'
 
+import {encryptPassword} from './modules/authentication'
 
 const app = express();
 const port = 4000;
@@ -24,6 +25,12 @@ app.get('/test_set', async (_,res) => {
 app.get('/test_get', async (_,res) => {
   const val = await client.get("something")
   res.send(`Something ${val}` )
+})
+
+app.get('/test_salt', async (_, res) => {
+  const hashed = await encryptPassword("testingpassword")
+  console.log(hashed)
+  res.send(hashed)
 })
 
 app.listen(port, () => {

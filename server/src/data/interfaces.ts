@@ -29,8 +29,6 @@ export interface IUser {
     firstName: string,
     lastName: string,
     email: string,
-    username: string,
-    // No password
     role: RoleType,
     verified: Verified,
     companyId: string
