@@ -11,6 +11,8 @@ const password: string = process.env.MYSQL_PASS
 const database: string = process.env.MYSQL_DB
 const sgAPI: string = process.env.SEND_GRID_API
 
+export const secret: string = process.env.SECRET
+
 export default function configs() {
     connectMongoDB(connStr)
     connectMySQL(host, user, password, database)
