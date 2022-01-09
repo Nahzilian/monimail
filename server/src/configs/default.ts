@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv'
 import { connectMongoDB } from './mongo'
-import { connectMySQL } from './mysql'
+import MySQLDatabase from './mysql'
 import { sgConfig } from './sendgrid'
 
 dotenv.config();
@@ -13,9 +13,11 @@ const sgAPI: string = process.env.SEND_GRID_API
 
 export const secret: string = process.env.SECRET
 
-export default function configs() {
+export default function configs(): MySQLDatabase {
     connectMongoDB(connStr)
-    connectMySQL(host, user, password, database)
+    // connectMySQL(host, user, password, database)
     sgConfig(sgAPI)
     // testMail()
+    let sqldb = new MySQLDatabase(host, user, password, database)
+    return sqldb
 }

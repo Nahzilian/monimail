@@ -15,16 +15,16 @@ create table users (
     email varchar(255) NOT NULL,
     username varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
-    role ENUM('admin', 'editor') DEFAULT 'editor',
+    role ENUM("admin", "editor") DEFAULT "editor",
     company_id varchar(36) NOT NULL,
-    verified ENUM('yes', 'no') DEFAULT 'no',
+    verified ENUM("yes", "no") DEFAULT "no",
     FOREIGN KEY (company_id) REFERENCES companies(id)
 );
 
 create table templates (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name varchar(255) NOT NULL,
-    type ENUM('media', 'template'),
+    type ENUM("media", "template"),
     user_id varchar(36) NOT NULL,
     created_on TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
@@ -78,7 +78,7 @@ create table mail_items (
 
 create table tracks (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    action_type ENUM('view', 'click') DEFAULT 'view',
+    action_type ENUM("view", "click") DEFAULT "view",
     mail_id int NOT NULL,
     subscriber_id varchar(36) NOT NULL,
     url_id int NOT NULL,
@@ -94,3 +94,8 @@ create table blacklist (
     subscriber_id varchar(36) NOT NULL,
     FOREIGN KEY (subscriber_id) REFERENCES subscribers(id)
 );
+
+-- Username: testusername
+-- password: testingpassword
+insert into companies (id, name, email) VALUES ("1155df5a-021e-4db9-b070-685169f239d7", "Monimail", "monimail@gmail.com");
+insert into users (id,first_name,last_name,email,username,password,role,company_id,verified) VALUES ("291622df-1ed7-41fd-bc41-ce8f0ab87331","John", "Doe", "monimail@gmail.com", "testusername", "$2b$15$tM/N1Xudxw2q0FOyLNgRv.EWwczYzi.CdE1emnPn6QyDpTL5CsLpy", "admin", "1155df5a-021e-4db9-b070-685169f239d7", "no");
