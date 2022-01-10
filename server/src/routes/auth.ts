@@ -3,6 +3,20 @@ import { getUserById, getUserByUsername } from '../data/query';
 import {isPasswordCorrect} from '../modules/authentication'
 
 const userRoute = express.Router();
+// Sign up
+
+/**
+ * Sign up
+ * Add data to database (Make a new query for this)
+ * Create new token
+ * Send back the information while data being stored (Includes token, user, company)
+ * 
+ * 
+ * Others:
+ * Make middleware to check for auth (based on role)
+ * Check login data => If exists and right password (with cache)
+ * Check registered data => If data does not exist (username/email does not exist)
+*/
 
 userRoute.post("/login", async (req: Request, res: Response) => {
     let username: string = req.body.username
@@ -12,6 +26,9 @@ userRoute.post("/login", async (req: Request, res: Response) => {
         if(!data) return res.status(400).send("User does not exist")
         let check = await isPasswordCorrect(password, data.password)
         if(!check) return res.status(400).send("Incorrect password")
+        // Give token to user
+        // Give user data + company to the client
+
         return res.send(data)
     })
     
