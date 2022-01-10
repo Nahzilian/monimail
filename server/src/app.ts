@@ -32,7 +32,7 @@ export let mysql: MySQLDatabase;
 // })
 
 app.use(bodyParser.json())
-app.use("/api/v1/user", userRoute)
+app.use("/api/v1/user", userRoute) //repeat this line to create new route -> create new .ts file within routes
 
 app.get('*', (_, res) => {
   res.send("PAGE NOT FOUND");
