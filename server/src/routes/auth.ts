@@ -1,7 +1,8 @@
 import express, {Request, Response} from 'express'
 import { getUserById, getUserByUsername } from '../data/query';
 import {isPasswordCorrect} from '../modules/authentication'
-
+import * as jwt from 'jsonwebtoken'
+import { User } from '../data/user';
 const userRoute = express.Router();
 // Sign up
 
@@ -27,6 +28,10 @@ userRoute.post("/login", async (req: Request, res: Response) => {
         let check = await isPasswordCorrect(password, data.password)
         if(!check) return res.status(400).send("Incorrect password")
         // Give token to user
+        const accesstoken = jwt.sign({id: data.id, role: data.role, time: Date.now}, process.env.TOKEN_KEY,{expiresIn: "1h",});
+        const refreshtoken = jwt.sign({id: data.id, role: data.role, time: Date.now}, process.env.TOKEN_KEY,{expiresIn: "1d",});
+        res.header('access-token',accesstoken).send(accesstoken);
+        res.header('refresh-token',refreshtoken).send(refreshtoken);
         // Give user data + company to the client
 
         return res.send(data)
