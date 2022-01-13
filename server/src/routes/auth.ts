@@ -30,8 +30,13 @@ userRoute.post("/login", async (req: Request, res: Response) => {
         // Give token to user
         const accesstoken = jwt.sign({id: data.id, role: data.role, time: Date.now}, process.env.TOKEN_KEY,{expiresIn: "1h",});
         const refreshtoken = jwt.sign({id: data.id, role: data.role, time: Date.now}, process.env.TOKEN_KEY,{expiresIn: "1d",});
-        res.header('access-token',accesstoken).send(accesstoken);
-        res.header('refresh-token',refreshtoken).send(refreshtoken);
+        res.header("access-token",accesstoken);
+        res.header("refresh-token",refreshtoken);
+        res.json({
+          user: data,
+          accesstoken,
+          refreshtoken,
+        });
         // Give user data + company to the client
 
         return res.send(data)
