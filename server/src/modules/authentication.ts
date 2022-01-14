@@ -27,15 +27,24 @@ export const isPasswordCorrect = (password: string, hashed: string) => {
 }
 
 export function auth(req: Request, res: Response, next) {
-    const token = req.headers['refresh-token'];
-    if (!token) return res.status(401).send('Access Denied');
-    try{
-        const verified = jwt.verify(token, process.env.TOKEN_KEY)
-
-    }catch (err)
-    {
-        res.status(400).send('invalid Token')
-    }
+    const accesstoken = req.headers['access-token'];
+    const refreshtoken = req.headers['refresh-token'];
+    if (!accesstoken || !refreshtoken) return res.status(401).send('Access Denied');
+    if (accesstoken)
+        try{
+            const accessverified = jwt.verify(accesstoken, process.env.TOKEN_KEY);
+        }catch (err)
+        {
+            res.status(400).send('invalid Token')
+        }
+    else if(refreshtoken)
+        try{
+            const refreshverified = jwt.verify(refreshtoken, process.env.TOKEN_KEY);
+        }catch (err)
+        {
+            res.status(400).send('invalid Token')
+        }
+        
 
 }
 
