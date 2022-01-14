@@ -2,10 +2,8 @@ import express, { Request, Response } from 'express';
 import { getUserById, getUserByUsername, emailInUse } from '../data/query';
 import { isPasswordCorrect, encryptPassword } from '../modules/authentication';
 import { createNewUser } from '../data/addition';
-import { mysql } from '../app';
 import { generateAccessToken } from '../modules/access';
 import * as uuid from "uuid";
-import { create } from 'domain';
 
 const userRoute = express.Router();
 
@@ -20,31 +18,27 @@ userRoute.post("/register", async (req: Request, res: Response) => {
     let company: string = req.body.companyid
 
     const password = await encryptPassword(pass)
-    let results = await emailInUse(email);
-    if (results === true) {
-      return res.status(409).send("Email in Use");
-    } else {
-      const guid: string = uuid.v4();
-      try {
-        await createNewUser(guid, firstname, lastname, email, username, password, role, company, async (data) => {
-          getUserByUsername(username, async (d) => {
-            if (d === undefined) {
-              return res.status(400).send("User does not exist");
-
-            } else {
-              console.log('---Generating Access Token')
-              const token = await generateAccessToken(email)
-              console.log(token)
-              console.log({ 'access': token, d })
-              return res.json({ 'accessToken': token, d })
-            }
+    emailInUse(email, async(results) => {
+      if (results != 0) {
+        return res.status(409).send("Email in Use");
+      } else {
+        try {
+          const guid:string = uuid.v4();
+          await createNewUser(guid, firstname, lastname, email, username, password, role, company, async (data) => {
+            getUserByUsername(username, async (d) => {
+              if (!d) {
+                return res.status(400).send("User does not exist");
+              } else {
+                const token = await generateAccessToken(email)
+                return res.json({ 'accessToken': token, d })
+              }
+            })
           })
-        })
-
-      } catch (err) {
-        console.log(err)
+        } catch (err) {
+          console.log(err)
+        }
       }
-    }
+    })
   } catch (error) {
     console.log(error);
   }

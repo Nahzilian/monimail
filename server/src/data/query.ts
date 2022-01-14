@@ -1,4 +1,3 @@
-import { callbackify } from 'util'
 import { mysql } from '../app'
 // Query for user info
 
@@ -34,15 +33,10 @@ export const getUserByEmail = async (Email: string, callback: Function): Promise
     })
 }
 
-export const emailInUse = async (Email: string) => {
+export const emailInUse = async (Email: string, callback: Function): Promise<any>  => {
     const query = `SELECT * FROM users where email='${Email}'`
-    let res:boolean = false
-    mysql.db.query(query, async (err, result) => {
+    return mysql.db.query(query, async (err, result, _) => {
         if (err) throw err
-        if (result.length != 0) {
-            console.log("Email in Use");
-            res = true
-        }
+        callback(result)
     })
-    return res
 }
